@@ -27,45 +27,54 @@ public class MajNomDeviseActivity extends AppCompatActivity {
 
 
         this.nomDevise = this.getIntent().getExtras().getString("nom");
+    }
+
+    public void ok(View v) {
+
+
+        String nomDevise = this.etNom.getText().toString().trim();
+        if (nomDevise.length() == 0) {
+            Toast.makeText(this, "le nom est vide !", Toast.LENGTH_LONG).show();
+        } else {
+            Intent donnees = new Intent();
+            donnees.putExtra("nom", this.etNom.getText().toString().trim());
+            this.setResult(OK, donnees);
+
+            this.finish();
         }
+    }
 
-        public void ok (View v)
+
+
+    public void modifClick(View v)
     {
+        this.ok(null);
+    }
 
 
-            String nomDevise = this.etNom.getText().toString().trim();
-            if (nomDevise.length() == 0) {
-                Toast.makeText(this, "le nom est vide !", Toast.LENGTH_LONG).show();
-            } else {
-                Intent donnees = new Intent();
-                donnees.putExtra("nom", this.etNom.getText().toString().trim());
-                this.setResult(OK, donnees);
+    public void retourClick(View view) {
+        this.annuler(null);
+    }
 
-                this.finish();
-            }
-        }
 
-    public void annuler(View v)
-    {
+    public void annuler(View v) {
         this.setResult(CANCEL);
         this.finish();
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         this.annuler(null);
 
     }
 
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
 
         this.etNom = this.findViewById(R.id.etNom);
     }
 
 
-    }
+}
 
 

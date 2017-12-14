@@ -10,9 +10,12 @@ import android.widget.Toast;
 
 public class DeviseActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
 
-    private Portefeuille P;
+
     private TextView etMontant;
     private EditText Edit;
+    private Devise d;
+    public static final int OK = 1;
+    private static final int CANCEL = 2;
 
 
     @Override
@@ -20,7 +23,7 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
     {
         super.onSaveInstanceState((outState));
 
-        outState.putSerializable("portefeuille",  this.P);
+        outState.putSerializable("devise",  this.d);
     }
 
 
@@ -33,11 +36,11 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
 
         if(savedInstanceState == null)
         {
-            P = new Portefeuille();
-            P.ajout(new Devise("Euro",500));
+            this.d = (Devise) this.getIntent().getSerializableExtra("devise");
+
         }
         else {
-            this.P = (Portefeuille)savedInstanceState.getSerializable("portefeuille");
+
         }
 
 
@@ -50,7 +53,7 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
         super.onStart();
 
         this.etMontant = (TextView)this.findViewById(R.id.textView);
-        this.etMontant.setText(P.getValeurs().get(0).getMontant()+" " + P.getValeurs().get(0).getNom());
+        this.etMontant.setText(d.getMontant()+" " + d.getNom());
         this.Edit = (EditText)this.findViewById(R.id.editText4);
 
 
@@ -62,14 +65,14 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
         float montant = Float.parseFloat(this.Edit.getText().toString());
 
         try {
-            P.getValeurs().get(0).ajout(montant);
+            d.ajout(montant);
 
         }catch(IllegalArgumentException e){
 
             System.out.println(e.getMessage());
     }
 
-        this.etMontant.setText(P.getValeurs().get(0).getMontant()+" " + P.getValeurs().get(0).getNom());
+        this.etMontant.setText(d.getMontant()+" " + d.getNom());
     }
 
 
@@ -78,7 +81,7 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
         float montant = Float.parseFloat(this.Edit.getText().toString());
 
         try {
-        P.getValeurs().get(0).retrait(montant);
+        d.retrait(montant);
 
         }catch(IllegalArgumentException e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -88,8 +91,32 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
 
         }
 
-        this.etMontant.setText(P.getValeurs().get(0).getMontant()+" " + P.getValeurs().get(0).getNom());
+        this.etMontant.setText(d.getMontant()+" " + d.getNom());
     }
+
+
+    public void annuler(View v)
+    {
+        this.setResult(CANCEL);
+        this.finish();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        this.annuler(null);
+
+    }
+
+    public void retourClick (View view)
+    {
+        this.annuler(null);
+    }
+
+
+
+
+
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
