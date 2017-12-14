@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.weezy.myappn1.MajNomDeviseActivity"
+    tools:showIn="@layout/activity_maj_nom_devise">
+
+    <EditText
+        android:id="@+id/etNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        app:layout_constraintTop_toBottomOf="parent"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="44dp"
+
+        />
+
+</android.support.constraint.ConstraintLayout>

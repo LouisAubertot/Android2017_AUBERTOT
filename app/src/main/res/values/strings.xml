@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyAppN1</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_maj_nom_devise">MajNomDeviseActivity</string>
+</resources>
