@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (resultCode == MajNomDeviseActivity.OK || resultCode == DeviseActivity.OK) {
             if (requestCode == CREATION_DEVISE) {
 
-                P.getValeurs().add(Intent);
+
 
             } else if (requestCode == MODIFICATION_NOM_DEVISE)
             {
