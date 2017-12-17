@@ -14,9 +14,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private ListView lstDevise;
     private Portefeuille P;
-    private static final int GESTION_DEVISE=0;
-    private static final int CREATION_DEVISE=1;
-    private static final int MODIFICATION_NOM_DEVISE=2;
+    private static final int GESTION_DEVISE = 0;
+    private static final int CREATION_DEVISE = 1;
+    private static final int MODIFICATION_NOM_DEVISE = 2;
     private int indexListe;
 
 
@@ -40,22 +40,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         P.ajout(d5);
 
 
-
-
-
-
-
-
     }
 
-    public void creerNouvelleDevise(View v)
-    {
+    public void creerNouvelleDevise(View v) {
         Intent appelActivite = new Intent(this, MajNomDeviseActivity.class);
-        startActivityForResult(appelActivite,MODIFICATION_NOM_DEVISE);
+        startActivityForResult(appelActivite, MODIFICATION_NOM_DEVISE);
     }
 
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
 
         this.lstDevise = this.findViewById(R.id.ma_liste);
@@ -73,15 +65,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-        Devise d = (Devise)this.lstDevise.getItemAtPosition(position);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Devise d = (Devise) this.lstDevise.getItemAtPosition(position);
 
         this.indexListe = position;
 
-        Intent appelActivite = new Intent(this,DeviseActivity.class);
+        Intent appelActivite = new Intent(this, DeviseActivity.class);
         appelActivite.putExtra("devise", d);
-        startActivityForResult(appelActivite,GESTION_DEVISE);
+        startActivityForResult(appelActivite, GESTION_DEVISE);
 
     }
 
@@ -89,30 +80,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 
         this.indexListe = position;
-        Devise d = (Devise)this.lstDevise.getItemAtPosition(this.indexListe);
+        Devise d = (Devise) this.lstDevise.getItemAtPosition(this.indexListe);
         Intent appelActivite = new Intent(this, MajNomDeviseActivity.class);
         appelActivite.putExtra("nom", d.getNom());
-        startActivityForResult(appelActivite,MODIFICATION_NOM_DEVISE);
+        startActivityForResult(appelActivite, MODIFICATION_NOM_DEVISE);
         return true;
     }
 
-/*
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if(resultCode == MajNomDeviseActivity.OK || resultCode == DeviseActivity.OK) {
-            if(requestCode == CREATION_DEVISE) {
-            }
-                else if (requestCode == MODIFICATION_NOM_DEVISE)
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == MajNomDeviseActivity.OK || resultCode == DeviseActivity.OK) {
+            if (requestCode == CREATION_DEVISE) {
+
+                P.getValeurs().add(Intent);
+
+            } else if (requestCode == MODIFICATION_NOM_DEVISE)
             {
+                P.getValeurs().
+
+
 
             }
-            else if (requestCode == GESTION_DEVISE){
+            else if (requestCode == GESTION_DEVISE)
+            {
 
 
             }
         }
 
-*/
-
-
     }
+}
