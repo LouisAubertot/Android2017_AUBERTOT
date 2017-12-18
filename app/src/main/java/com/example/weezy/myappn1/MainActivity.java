@@ -92,17 +92,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (resultCode == MajNomDeviseActivity.OK || resultCode == DeviseActivity.OK) {
             if (requestCode == CREATION_DEVISE) {
 
+                String nomDevise = data.getExtras().getString("nom");
+                Devise d = new Devise(nomDevise,0);
+                P.ajout(d);
+
 
 
             } else if (requestCode == MODIFICATION_NOM_DEVISE)
             {
-                P.getValeurs().
+                String nomDevise = data.getExtras().getString("nom");
+                Devise d= (Devise)this.lstDevise.getItemAtPosition(this.indexListe);
+                d.setNom(nomDevise);
+                P.addDevise(d);
 
 
 
             }
             else if (requestCode == GESTION_DEVISE)
             {
+                Devise d = (Devise)data.getExtras().getSerializable("deviseenvoie");
+                P.addDevise(d);
 
 
             }

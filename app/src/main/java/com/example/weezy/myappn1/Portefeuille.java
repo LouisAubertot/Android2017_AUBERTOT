@@ -59,6 +59,23 @@ public class Portefeuille implements Serializable
 
     }
 
+
+
+    public void addDevise(Devise d)
+    {
+        int i = this.chercheMonnaie(d.getNom());
+
+        if (i == -1)
+        {
+            this.valeurs.add(new Devise (d));
+        }
+        else{
+            float mont = d.getMontant();
+            this.valeurs.get(i).ajout(d.getMontant());
+            this.valeurs.get(i).setMontant(mont);
+        }
+    }
+
     /**
      * Sortie d'argent du portefeuille
      * @param d la devise dont on sort de l'argent
