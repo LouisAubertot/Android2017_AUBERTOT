@@ -112,7 +112,9 @@ public class Portefeuille implements Serializable
 
     /**
      * Tri de la liste de devises
-     */
+     */  /**
+ * Tri de la liste de devises
+ */
 
 
 

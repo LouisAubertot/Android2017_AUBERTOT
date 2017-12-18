@@ -86,7 +86,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivityForResult(appelActivite, MODIFICATION_NOM_DEVISE);
         return true;
     }
+    /**
 
+     */
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == MajNomDeviseActivity.OK || resultCode == DeviseActivity.OK) {
