@@ -1,5 +1,6 @@
 package com.example.weezy.myappn1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -110,8 +111,17 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
 
     public void retourClick (View view)
     {
-        this.annuler(null);
+        Intent retour = new Intent();
+        retour.putExtra("devise", d);
+
+        setResult(OK,retour);
+
+
+        this.finish();
     }
+
+
+
 
 
 
@@ -128,5 +138,16 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
         return false;
+    }
+
+    public void clickBack(View view) {
+        Intent retour = new Intent();
+        retour.putExtra("devise", d);
+
+        setResult(OK,retour);
+
+
+        this.finish();
+
     }
 }
