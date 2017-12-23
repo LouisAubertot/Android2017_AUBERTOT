@@ -37,6 +37,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
+        if (savedInstanceState==null) {
+            this.P = SerialisationPortefeuilleDAO.getInstance(this).charge();
+        } else {
+            this.P = (Portefeuille) savedInstanceState.getSerializable("portefeuille");
+            this.indexListe = savedInstanceState.getInt("index");
+        }
+
+
+
+
+
         this.P = new Portefeuille();
         Devise d1 = new Devise("euro", 3500);
         Devise d2 = new Devise("Livres", 1500);

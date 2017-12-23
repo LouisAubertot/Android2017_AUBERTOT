@@ -76,6 +76,21 @@ public class Portefeuille implements Serializable
         }
     }
 
+    public void deleteDevise(Devise d)
+    {
+        int i = this.chercheMonnaie(d.getNom());
+
+        if (i == -1)
+        {
+            this.valeurs.remove(d);
+        }
+        else{
+
+            throw new IllegalArgumentException("La devise que vou souhaitez supprimer n'existe pas !");
+        }
+
+    }
+
     /**
      * Sortie d'argent du portefeuille
      * @param d la devise dont on sort de l'argent

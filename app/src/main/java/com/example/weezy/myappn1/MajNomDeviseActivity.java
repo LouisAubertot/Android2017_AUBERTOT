@@ -25,8 +25,15 @@ public class MajNomDeviseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maj_nom_devise);
 
+        if (savedInstanceState != null) {
+            this.nomDevise = savedInstanceState.getString("nom");
+        } else if (this.getIntent().getExtras() == null) {
+            this.nomDevise = "";
+        } else {
+            this.nomDevise = this.getIntent().getExtras().getString("nom");
+        }
 
-        this.nomDevise = this.getIntent().getExtras().getString("nom");
+
     }
 
     public void ok(View v) {
@@ -45,9 +52,15 @@ public class MajNomDeviseActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("nom", this.nomDevise);
 
-    public void modifClick(View v)
-    {
+    }
+
+
+    public void modifClick(View v) {
         this.ok(null);
     }
 

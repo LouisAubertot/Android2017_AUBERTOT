@@ -1,19 +1,28 @@
 package com.example.weezy.myappn1;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class DeviseActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
 
 
     private TextView etMontant;
     private EditText Edit;
+    private Portefeuille P;
     private Devise d;
     public static final int OK = 1;
     private static final int CANCEL = 2;
@@ -35,17 +44,44 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.devise_activity);
 
 
-        if(savedInstanceState == null)
+        if(savedInstanceState != null)
         {
-            this.d = (Devise) this.getIntent().getSerializableExtra("devise");
+            this.d = (Devise)savedInstanceState.getSerializable("devise");
 
         }
         else {
+
+            this.d = (Devise) this.getIntent().getSerializableExtra("devise");
 
         }
 
 
     }
+
+
+    public void alert (){
+
+        AlertDialog.Builder builderAlert = new AlertDialog.Builder(this);
+        builderAlert.setMessage("la devise a un montant égal a 0")
+                .setTitle("Voulez vous sortir cette devise du portefeuille ? ")
+                .setPositiveButton("Oui", (DialogInterface.OnClickListener) this)
+                .setNegativeButton("Non", (DialogInterface.OnClickListener) this);
+        builderAlert.show();
+    }
+
+    public void onClick(DialogInterface dialog, int choix)
+    {
+        if (choix == DialogInterface.BUTTON_POSITIVE)
+        {
+            P.deleteDevise(d);
+        }
+        else if(choix == DialogInterface.BUTTON_NEGATIVE)
+        {
+            this.annuler(null);
+        }
+    }
+
+
 
 
 
@@ -57,8 +93,15 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
         this.etMontant.setText(d.getMontant()+" " + d.getNom());
         this.Edit = (EditText)this.findViewById(R.id.editText4);
 
+    }
 
 
+    private void cacheClavier()
+    {
+        InputMethodManager mgr = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(this.etMontant.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+
+        this.etMontant.setText("");
     }
 
     public void AjouterClick(View view)
@@ -119,6 +162,9 @@ public class DeviseActivity extends AppCompatActivity implements AdapterView.OnI
 
         this.finish();
     }
+
+
+
 
 
 
